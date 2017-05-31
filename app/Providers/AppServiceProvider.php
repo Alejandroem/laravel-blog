@@ -17,6 +17,12 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
+        //cuando se cargue la vista layouts.sidebar
+        view()->composer('layouts.sidebar',function($view){
+            
+            //se le coloca la variablearchivos a la vista
+            $view->with('archives',\App\Post::archives()); 
+        });
 
     }
 
