@@ -37,7 +37,7 @@ class Post extends Model
     public static function archives(){ // esta es una funcion para poder obtener un query es basicamente como pegarle este codigo a lo que se envia acá
         return static::selectRaw('year(created_at) year,monthname(created_at) month,count(*) published')
             ->groupBy('year','month')
-            ->orderByRaw('min(created_at)')
+            ->orderByRaw('min(created_at) desc')
             ->get()
             ->toArray();
     }
