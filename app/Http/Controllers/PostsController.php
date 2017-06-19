@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
-
+use App\Repositories\Posts;
 use Illuminate\Http\Request;
 
 use Carbon\Carbon;
@@ -15,11 +15,13 @@ class PostsController extends Controller
         $this->middleware('auth')->except(['index','show']);
     }
 
-
-    public function index(){
-        $posts = Post::latest()
+    //dependency inyecton over posts repositorie
+    public function index(Posts $posts){
+        dd($posts);
+        $posts = $posts->all()
+        /*$posts = Post::latest()
             ->filter(request(['month','year']))//Acá podemos mandar a llamar un queryScope, que significa un query dentro dle modelo enviandole parametros
-            ->get();
+            ->get();*/
 
 
         //        $posts = Post::latest();
