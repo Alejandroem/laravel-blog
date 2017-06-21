@@ -25,7 +25,7 @@ $stripe = app('App\Billing\Stripe');
 dd($stripe);
 */
 
-dd(resolve('App\Billing\Stripe'));
+//dd(resolve('App\Billing\Stripe'));
 
 Route::get('/','PostsController@index')->name('home');
 Route::get('/posts/create','PostsController@create');
@@ -42,4 +42,6 @@ Route::get('/login','SessionsController@create');
 Route::post('/login','SessionsController@store');
 
 Route::get('/logout','SessionsController@destroy');
+
+Route::get('/test','PostsController@test');
 

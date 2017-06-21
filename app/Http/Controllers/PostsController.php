@@ -17,36 +17,36 @@ class PostsController extends Controller
 
     //dependency inyecton over posts repositorie
     public function index(Posts $posts){
-        dd($posts);
-        $posts = $posts->all()
-        /*$posts = Post::latest()
+        //dd($posts);
+        $posts = $posts->all();
+            /*$posts = Post::latest()
             ->filter(request(['month','year']))//Acá podemos mandar a llamar un queryScope, que significa un query dentro dle modelo enviandole parametros
             ->get();*/
 
 
-        //        $posts = Post::latest();
-        //        
-        //        // esto se mueve a scope filter de post.php
-        //        if($month = request('month')){
-        //            $posts->whereMonth('created_at', Carbon::parse($month)->month);
-        //        }
-        //        
-        //        if($year = request('year')){
-        //            $posts->whereYear('created_at', $year);
-        //        }
-        //        
-        //        $posts = $posts->get();
+            //        $posts = Post::latest();
+            //        
+            //        // esto se mueve a scope filter de post.php
+            //        if($month = request('month')){
+            //            $posts->whereMonth('created_at', Carbon::parse($month)->month);
+            //        }
+            //        
+            //        if($year = request('year')){
+            //            $posts->whereYear('created_at', $year);
+            //        }
+            //        
+            //        $posts = $posts->get();
 
 
-        //        $archives = Post::selectRaw('year(created_at) year,monthname(created_at) month,count(*) published')
-        //            ->groupBy('year','month')
-        //            ->orderByRaw('min(created_at)')
-        //            ->get()
-        //            ->toArray();
+            //        $archives = Post::selectRaw('year(created_at) year,monthname(created_at) month,count(*) published')
+            //            ->groupBy('year','month')
+            //            ->orderByRaw('min(created_at)')
+            //            ->get()
+            //            ->toArray();
 
 
 
-        return view('posts.index',compact('posts'));
+            return view('posts.index',compact('posts'));
     }
 
     public function show(Post $post){
@@ -83,6 +83,12 @@ class PostsController extends Controller
 
         return redirect('/');
     }
-  
+        public function test(Request $request){
+
+            if (!$request->has('trial_end')) { //this is what you have wrong
+                $request->merge(array('trial_end' => 'test'));
+            }
+            return $request->get('trial_end');
+        }
 
 }
